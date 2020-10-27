@@ -1,0 +1,61 @@
+import javax.security.auth.callback.TextOutputCallback;
+import java.util.Stack;
+
+/**
+ * Demo class
+ * 编写一个类，用两个栈实现队列，支持队列的基本操作
+ * 栈：先进后出；队列：后进先出
+ * 必须一次性压入stackpush，在stackpop为空时，才可压入数据。
+ * @author dys
+ * @date 2020/10/27
+ */
+
+public class TwoStacksQueue {
+    public Stack<Integer> stackPush;
+    public Stack<Integer> stackPop;
+
+    public TwoStacksQueue(){
+        stackPop = new Stack<Integer>();
+        stackPush = new Stack<Integer>();
+    }
+    public void add(int newNum){
+        stackPush.push(newNum);
+    }
+    // poll方法是从队列中获取队首元素并删除它
+    public int poll(){
+        if(stackPop.empty() && stackPush.empty()){
+            throw new RuntimeException("Your Queue is empty!");
+        }else if (stackPop.empty()){
+            while (!stackPush.empty()){
+                // 栈的pop方法在获取栈顶元素的同时会删除该元素
+                stackPop.push(stackPush.pop());
+            }
+        }
+        return stackPop.pop();
+    }
+    // peek用于查找队首的元素
+    public int peek(){
+        if (stackPush.empty() && stackPop.empty()){
+            throw new RuntimeException("Your Queue is empty!");
+        }else if(stackPop.empty()){
+            while (!stackPush.empty()){
+                // 返回栈顶元素且不删除
+                stackPop.push(stackPush.pop());
+            }
+        }
+        return stackPop.peek();
+    }
+
+    public static void main(String[] args) {
+        TwoStacksQueue twoStacksQueue = new TwoStacksQueue();
+        for (int i=1;i<6;i++){
+            twoStacksQueue.add(i);
+            System.out.println(twoStacksQueue.stackPush);
+        }
+        System.out.println(twoStacksQueue.peek());
+        System.out.println(twoStacksQueue.poll());
+
+    }
+}
+// 使用add poll peek相对于 offer remove element
+// 实现了添加元素 返回头部并删除  删除 三种功能 并且不会因为队列满、队列空的情况抛异常
