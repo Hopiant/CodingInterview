@@ -58,4 +58,4 @@ public class TwoStacksQueue {
     }
 }
 // 使用add poll peek相对于 offer remove element
-// 实现了添加元素 返回头部并删除  删除 三种功能 并且不会因为队列满、队列空的情况抛异常
+// 实现了 队列-> 添加元素 返回头部并删除  头部查询 三种功能 并且不会因为队列满、队列空的情况抛异常
