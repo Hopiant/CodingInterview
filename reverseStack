@@ -1,0 +1,57 @@
+/**
+ * Demo class
+ * 仅用队规函数和栈操作逆序一个栈
+ * 一个栈依次压入1、2、3，那么从栈顶到栈底分别为3、2、1
+ * 将这个栈转置后，从栈顶到栈底为1、2、3，也就是实现栈中元素的逆序
+ * 只用递归函数来实现，不能使用其他数据结构
+ * @author dys
+ * @date 2020/10/28
+ */
+
+import java.util.Stack;
+
+public class ReverseStack {
+    /**
+     * 将栈stack的栈底元素返回并移除
+     * 栈顶到栈底依次为3、2、1
+     * 一次调用返回1，剩余栈顶到栈底为3、2
+     * 两次调用返回2，剩余栈顶到栈底为3
+     * 三次调用返回3，栈为空
+     */
+    public static int getAndRemoveLastElement(Stack<Integer> stack){
+        int result = stack.pop();
+        if (stack.isEmpty()){
+            return result;
+        }else {
+            int last = getAndRemoveLastElement(stack);
+            stack.push(result);
+            return last;
+        }
+    }
+
+    /**i
+     * 逆序一个栈
+     * 一次调用i=1,等待压入1
+     * 二次调用i=2,等待压入2
+     * 三次调用i=3，压入3，
+     * 结束后栈顶到栈底为1、2、3
+     */
+    public static void reverse(Stack<Integer> stack){
+        if (stack.isEmpty()){
+            return;
+        }
+        int i = getAndRemoveLastElement(stack);
+        reverse(stack);
+        stack.push(i);
+    }
+
+    public static void main(String[] args) {
+        Stack<Integer> reverseStack = new Stack<Integer>();
+        for (int i=1;i<6;i++){
+            reverseStack.push(i);
+        }
+        System.out.println(reverseStack);
+        reverse(reverseStack);
+        System.out.println(reverseStack);
+    }
+}
