@@ -4,6 +4,7 @@ import java.util.Stack;
  * Demo class
  * 用一个栈实现另一个栈的排序，栈中元素为整型
  * 需要将该栈从顶到底按从大到小的顺序排列，只允许申请一个栈
+ * peek 不改变栈的值(不删除栈顶的值)，pop会把栈顶的值删除。两者都返回栈顶的值
  * 方法如下：
  * 需要排序的栈为stack，申请的辅助栈为help，在stack上pop操作，弹出元素为cur
  * 如果cur小于或等于help栈顶元素，则将cur直接压入help
@@ -29,11 +30,9 @@ public class SortStack {
 
     public static void main(String[] args) {
         Stack<Integer> stack = new Stack<Integer>();
-        stack.push(3);
-        stack.push(1);
-        stack.push(4);
         stack.push(2);
-        stack.push(5);
+        stack.push(1);
+        stack.push(3);
         System.out.println(stack);
         sortStack(stack);
         System.out.println(stack);
